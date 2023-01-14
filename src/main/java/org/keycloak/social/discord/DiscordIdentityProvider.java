@@ -45,7 +45,7 @@ public class DiscordIdentityProvider extends AbstractOAuth2IdentityProvider<Disc
     public static final String TOKEN_URL = "https://discord.com/api/oauth2/token";
     public static final String PROFILE_URL = "https://discord.com/api/users/@me";
     public static final String GROUP_URL = "https://discord.com/api/users/@me/guilds";
-    public static final String DEFAULT_SCOPE = "identify email";
+    public static final String DEFAULT_SCOPE = "identify";
     public static final String GUILDS_SCOPE = "guilds";
 
     public DiscordIdentityProvider(KeycloakSession session, DiscordIdentityProviderConfig config) {
@@ -70,7 +70,6 @@ public class DiscordIdentityProvider extends AbstractOAuth2IdentityProvider<Disc
         BrokeredIdentityContext user = new BrokeredIdentityContext(getJsonProperty(profile, "id"));
 
         user.setUsername(getJsonProperty(profile, "username") + "#" + getJsonProperty(profile, "discriminator"));
-        user.setEmail(getJsonProperty(profile, "email"));
         user.setIdpConfig(getConfig());
         user.setIdp(this);
 
